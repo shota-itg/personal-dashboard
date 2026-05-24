@@ -1,0 +1,257 @@
+<!-- /index.html -->
+<!-- トップページの構造 -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header dashboard-header">
+    <h1>My Dashboard</h1>
+
+    <button type="button" class="settings-button" id="openLayoutSettingsButton">
+      ⚙ 設定
+    </button>
+  </header>
+
+  <main class="dashboard">
+    <section class="top-grid" id="topGrid">
+      <!-- 直近の予定・締切 -->
+      <section class="card upcoming-card">
+        <div class="card-header">
+          <h2>直近の予定・締切</h2>
+          <button type="button" class="add-task-button" id="openAddTaskModalButton">
+            ＋予定を追加
+          </button>
+        </div>
+
+        <div class="upcoming-scroll-area">
+          <ul class="upcoming-list" id="upcomingList"></ul>
+        </div>
+
+        <div class="card-footer">
+          <a href="tasks.html" class="text-link">すべての予定を管理する →</a>
+        </div>
+      </section>
+
+      <!-- ミニカレンダー -->
+      <section class="card calendar-card">
+        <div class="card-header">
+          <h2>カレンダー</h2>
+          <a href="calendar.html" class="card-link">開く</a>
+        </div>
+
+        <div class="calendar-view-switch">
+          <button type="button" class="calendar-mode-button active" data-calendar-mode="day">日</button>
+          <button type="button" class="calendar-mode-button" data-calendar-mode="week">週</button>
+          <button type="button" class="calendar-mode-button" data-calendar-mode="month">月</button>
+        </div>
+
+        <div class="mini-calendar" id="miniCalendar"></div>
+      </section>
+    </section>
+
+    <!-- 小さめのアナログ時計 -->
+    <a href="clock.html" class="card home-clock-card" id="homeClockCard">
+      <div class="card-header">
+        <h2>アナログ時計</h2>
+        <span class="card-link">時計ページへ</span>
+      </div>
+
+      <div class="home-clock-wrapper">
+        <div class="clock home-clock" id="homeClock">
+          <div class="ticks" id="homeTicks"></div>
+          <div class="numbers" id="homeNumbers"></div>
+
+          <div class="hand hour-hand" id="homeHourHand"></div>
+          <div class="hand minute-hand" id="homeMinuteHand"></div>
+          <div class="hand second-hand" id="homeSecondHand"></div>
+
+          <div class="center-dot"></div>
+          <div class="date-display" id="homeCurrentDate"></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 予定追加・編集モーダル -->
+    <div class="modal-overlay" id="taskModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">予定を追加</h2>
+          <button type="button" class="modal-close-button" id="closeTaskModalButton">×</button>
+        </div>
+
+        <form id="taskModalForm" class="task-form">
+          <input type="hidden" id="modalTaskId" />
+
+          <div class="form-row">
+            <label for="modalTaskTitle">タイトル</label>
+            <input
+              type="text"
+              id="modalTaskTitle"
+              required
+              placeholder="例：研究室ミーティング"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="modalTaskLocation">場所</label>
+            <input
+              type="text"
+              id="modalTaskLocation"
+              placeholder="例：研究室、オンライン、〇〇駅周辺"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="modalTaskCategory">カテゴリ</label>
+            <select id="modalTaskCategory">
+              <option value="締切">締切</option>
+              <option value="研究">研究</option>
+              <option value="授業">授業</option>
+              <option value="就活">就活</option>
+              <option value="私用">私用</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div class="form-row form-row-inline">
+            <label for="modalTaskIsAllDay">終日</label>
+            <input type="checkbox" id="modalTaskIsAllDay" />
+          </div>
+
+          <div class="time-grid">
+            <div class="form-row">
+              <label for="modalTaskStartDate">開始日</label>
+              <input type="date" id="modalTaskStartDate" required />
+            </div>
+
+            <div class="form-row">
+              <label for="modalTaskStartTime">開始時刻</label>
+              <input type="time" id="modalTaskStartTime" />
+            </div>
+
+            <div class="form-row">
+              <label for="modalTaskEndDate">終了日</label>
+              <input type="date" id="modalTaskEndDate" required />
+            </div>
+
+            <div class="form-row">
+              <label for="modalTaskEndTime">終了時刻</label>
+              <input type="time" id="modalTaskEndTime" />
+            </div>
+          </div>
+
+          <div class="travel-grid">
+            <div class="form-row">
+              <label for="modalTaskTravelMode">移動手段</label>
+              <select id="modalTaskTravelMode">
+                <option value="none">なし</option>
+                <option value="walk">徒歩</option>
+                <option value="train">電車</option>
+                <option value="car">車</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="modalTaskTravelTime">移動時間</label>
+              <select id="modalTaskTravelTime">
+                <option value="0">なし</option>
+                <option value="5">5分</option>
+                <option value="10">10分</option>
+                <option value="15">15分</option>
+                <option value="30">30分</option>
+                <option value="45">45分</option>
+                <option value="60">60分</option>
+                <option value="90">90分</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="modalTaskImportance">重要度 自動判定</label>
+            <select id="modalTaskImportance" disabled>
+              <option value="5">5：高い</option>
+              <option value="4">4</option>
+              <option value="3">3：普通</option>
+              <option value="2">2</option>
+              <option value="1">1：低い</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="modalTaskMemo">メモ</label>
+            <textarea
+              id="modalTaskMemo"
+              rows="4"
+              placeholder="補足情報や準備することなど"
+            ></textarea>
+          </div>
+
+          <div class="modal-detail" id="modalTaskDetail"></div>
+
+          <div class="modal-actions">
+            <button type="submit" id="saveTaskButton">追加する</button>
+            <button type="button" class="secondary-button" id="deleteTaskButton">
+              削除する
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- 予定ホバープレビュー -->
+  <div class="task-preview" id="taskPreview"></div>
+
+  <!-- レイアウト設定モーダル -->
+  <div class="modal-overlay" id="layoutSettingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>画面レイアウト設定</h2>
+        <button type="button" class="modal-close-button" id="closeLayoutSettingsButton">×</button>
+      </div>
+
+      <div class="layout-setting-list">
+        <div class="form-row">
+          <label for="dashboardWidthRange">
+            全体の横幅：<span id="dashboardWidthValue"></span>%
+          </label>
+          <input type="range" id="dashboardWidthRange" min="60" max="100" value="96" />
+        </div>
+
+        <div class="form-row">
+          <label for="topGridRatioRange">
+            予定欄の広さ：<span id="topGridRatioValue"></span>
+          </label>
+          <input type="range" id="topGridRatioRange" min="1" max="5" value="3" />
+        </div>
+
+        <div class="form-row">
+          <label for="clockHeightRange">
+            時計カードの高さ：<span id="clockHeightValue"></span>px
+          </label>
+          <input type="range" id="clockHeightRange" min="300" max="700" value="460" />
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="resetLayoutSettingsButton" class="secondary-button">
+          初期値に戻す
+        </button>
+        <button type="button" id="saveLayoutSettingsButton">
+          保存
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/tasks.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>

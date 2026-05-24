@@ -1,0 +1,77 @@
+<!-- /tasks.html -->
+    <!-- 予定・締切詳細ページ -->
+
+<!-- /tasks.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasks</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>予定・締切管理</h1>
+  </header>
+
+  <main class="task-page">
+    <section class="card">
+      <div class="card-header">
+        <h2>予定を追加</h2>
+        <a href="index.html" class="text-link">トップへ戻る</a>
+      </div>
+
+      <form id="taskForm" class="task-form">
+        <input type="hidden" id="taskId" />
+
+        <div class="form-row">
+          <label for="taskTitle">タイトル</label>
+          <input type="text" id="taskTitle" required placeholder="例：進捗報告スライド作成" />
+        </div>
+
+        <div class="form-row">
+          <label for="taskDate">日付</label>
+          <input type="date" id="taskDate" required />
+        </div>
+
+        <div class="form-row">
+          <label for="taskType">分類</label>
+          <select id="taskType">
+            <option value="締切">締切</option>
+            <option value="研究">研究</option>
+            <option value="就活">就活</option>
+            <option value="授業">授業</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="taskImportance">重要度</label>
+          <select id="taskImportance">
+            <option value="5">5：高い</option>
+            <option value="4">4</option>
+            <option value="3">3：普通</option>
+            <option value="2">2</option>
+            <option value="1">1：低い</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submitButton">追加する</button>
+          <button type="button" id="cancelEditButton" class="secondary-button">編集をキャンセル</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>予定・締切一覧</h2>
+      <ul class="task-list" id="taskList"></ul>
+    </section>
+  </main>
+
+  <script src="js/tasks.js"></script>
+  <script src="js/tasks-page.js"></script>
+</body>
+</html>

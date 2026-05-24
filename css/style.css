@@ -1,0 +1,1591 @@
+/* css/style.css */
+  /*全体デザイン*/
+
+/* =========================
+   Dashboard Layout
+========================= */
+
+.dashboard {
+  width: min(1100px, 95%);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #f7f7f7;
+  border: 1px solid #d0d0d0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.card-link {
+  font-size: 14px;
+  color: #555;
+}
+
+/* =========================
+   Upcoming
+========================= */
+
+.upcoming-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upcoming-item {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.upcoming-item:last-child {
+  border-bottom: none;
+}
+
+.upcoming-date {
+  font-weight: bold;
+}
+
+.upcoming-title {
+  font-size: 16px;
+}
+
+.upcoming-meta {
+  font-size: 13px;
+  color: #555;
+}
+
+.priority-high {
+  color: #b00020;
+  font-weight: bold;
+}
+
+.priority-middle {
+  color: #8a5a00;
+  font-weight: bold;
+}
+
+.priority-low {
+  color: #333;
+}
+
+/* =========================
+   Mini Calendar
+========================= */
+
+.calendar-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 4px;
+}
+
+.calendar-weekdays span {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+}
+
+.calendar-day {
+  padding: 8px 0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.calendar-day.today {
+  background: #111;
+  color: #fff;
+  font-weight: bold;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+/* =========================
+   Mini Calendar with Labels
+========================= */
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 4px;
+}
+
+.calendar-day {
+  min-height: 58px;
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+.calendar-day.today {
+  background: #111;
+  color: #fff;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.calendar-task-area {
+  display: grid;
+  gap: 2px;
+}
+
+.calendar-task-label {
+  padding: 1px 4px;
+  border-radius: 999px;
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111;
+}
+
+/* 分類ごとの簡易色 */
+.type-締切 {
+  background: #ffd6d6;
+}
+
+.type-研究 {
+  background: #d8f3dc;
+}
+
+.type-就活 {
+  background: #dbeafe;
+}
+
+.type-授業 {
+  background: #fff3bf;
+}
+
+.type-その他 {
+  background: #e5e7eb;
+}
+
+.calendar-more {
+  font-size: 10px;
+  color: #555;
+  text-align: center;
+}
+
+/* =========================
+   Home Clock
+========================= */
+
+.home-clock-card {
+  cursor: pointer;
+}
+
+.home-clock-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-clock {
+  width: 38vmin;
+  height: 38vmin;
+  min-width: 260px;
+  min-height: 260px;
+  max-width: 360px;
+  max-height: 360px;
+}
+
+.home-clock .number span {
+  font-size: clamp(24px, 4vmin, 44px);
+}
+
+.home-clock .tick::before {
+  height: 10px;
+}
+
+.home-clock .tick.major::before {
+  height: 20px;
+}
+
+.home-clock .hour-hand {
+  width: 10px;
+}
+
+.home-clock .minute-hand {
+  width: 8px;
+}
+
+.home-clock .second-hand {
+  width: 2px;
+}
+
+.home-clock .date-display {
+  font-size: clamp(13px, 2vmin, 20px);
+  top: 63%;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 800px) {
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .home-clock {
+    width: 70vmin;
+    height: 70vmin;
+  }
+}
+
+/* =========================
+   Analog Clock Base
+========================= */
+
+.clock {
+  position: relative;
+  width: 80vmin;
+  height: 80vmin;
+  max-width: 800px;
+  max-height: 800px;
+  min-width: 320px;
+  min-height: 320px;
+
+  border: 5px solid #000;
+  border-radius: 50%;
+  background: #f5f5f5;
+}
+
+/* 目盛り */
+.tick {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(calc(6deg * var(--i)));
+}
+
+.tick::before {
+  content: "";
+  position: absolute;
+  top: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 18px;
+  background: #000;
+  border-radius: 2px;
+}
+
+.tick.major::before {
+  width: 5px;
+  height: 34px;
+}
+
+/* 数字 */
+.number {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform: rotate(calc(30deg * var(--i)));
+  pointer-events: none;
+}
+
+.number span {
+  display: inline-block;
+  margin-top: 7%;
+  transform: rotate(calc(-30deg * var(--i)));
+  font-size: clamp(32px, 7vmin, 72px);
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* 針 */
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(0deg);
+  border-radius: 999px;
+  background: #000;
+}
+
+.hour-hand {
+  width: 16px;
+  height: 25%;
+  z-index: 4;
+}
+
+.minute-hand {
+  width: 12px;
+  height: 38%;
+  z-index: 5;
+}
+
+.second-hand {
+  width: 3px;
+  height: 43%;
+  background: #222;
+  z-index: 6;
+}
+
+/* 中心 */
+.center-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  background: #000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.center-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: #f5f5f5;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 日付 */
+.date-display {
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  text-align: center;
+  font-size: clamp(13px, 2vmin, 20px);
+  line-height: 1.4;
+  z-index: 20;
+}
+
+/* =========================
+   Home Clock Size
+========================= */
+
+.home-clock-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-clock {
+  width: 38vmin;
+  height: 38vmin;
+  min-width: 260px;
+  min-height: 260px;
+  max-width: 360px;
+  max-height: 360px;
+}
+
+.home-clock .number span {
+  font-size: clamp(24px, 4vmin, 44px);
+}
+
+.home-clock .tick::before {
+  height: 10px;
+}
+
+.home-clock .tick.major::before {
+  height: 20px;
+}
+
+.home-clock .hour-hand {
+  width: 10px;
+}
+
+.home-clock .minute-hand {
+  width: 8px;
+}
+
+.home-clock .second-hand {
+  width: 2px;
+}
+
+/* =========================
+   Task Page
+========================= */
+
+.task-page {
+  width: min(1000px, 95%);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.text-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.task-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  gap: 6px;
+}
+
+.form-row label {
+  font-weight: bold;
+}
+
+.form-row input,
+.form-row select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.form-actions button,
+.task-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.secondary-button {
+  background: #777 !important;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.task-list-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-list-item.completed {
+  opacity: 0.5;
+}
+
+.task-list-item.completed .task-title {
+  text-decoration: line-through;
+}
+
+.task-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.task-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.task-meta {
+  font-size: 13px;
+  color: #555;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 700px) {
+  .task-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =========================
+   Page Common
+========================= */
+
+.page-nav {
+  width: min(1100px, 95%);
+  margin: 0 auto 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Clock Page
+========================= */
+
+.clock-page {
+  padding: 24px 0 40px;
+}
+
+.clock-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.large-clock {
+  width: 78vmin;
+  height: 78vmin;
+  max-width: 800px;
+  max-height: 800px;
+  min-width: 320px;
+  min-height: 320px;
+}
+
+/* =========================
+   Calendar Page
+========================= */
+
+.calendar-page {
+  width: min(1100px, 95%);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.calendar-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.calendar-page-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.calendar-page-header button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.full-calendar-weekdays,
+.full-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.full-calendar-weekdays span {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.full-calendar-days {
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.full-calendar-day {
+  min-height: 120px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.full-calendar-day.empty {
+  visibility: hidden;
+}
+
+.full-calendar-day.today {
+  border: 2px solid #111;
+}
+
+.full-calendar-day-number {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.full-calendar-task-area {
+  display: grid;
+  gap: 4px;
+}
+
+.full-calendar-day .calendar-task-label {
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 画面が小さいとき */
+@media (max-width: 800px) {
+  .full-calendar-day {
+    min-height: 90px;
+    padding: 5px;
+  }
+
+  .full-calendar-day .calendar-task-label {
+    font-size: 10px;
+  }
+
+  .calendar-page-header h2 {
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   Upcoming Scroll Area
+========================= */
+
+.upcoming-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  max-height: 560px;
+}
+
+.upcoming-scroll-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.upcoming-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.upcoming-scroll-area::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 999px;
+}
+
+.upcoming-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-footer {
+  flex-shrink: 0;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+/* =========================
+   Modal
+========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  width: min(520px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #f7f7f7;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.modal-close-button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #ddd;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  background: #ccc;
+}
+
+.modal-detail {
+  padding: 12px;
+  border-radius: 10px;
+  background: #eeeeee;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.modal-actions button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+#deleteTaskButton {
+  background: #b00020;
+}
+
+#deleteTaskButton.hidden {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .upcoming-scroll-area {
+    max-height: 260px;
+  }
+
+  .modal-content {
+    padding: 18px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+/* =========================
+   Task Hover Preview
+========================= */
+
+.task-preview {
+  position: fixed;
+  display: none;
+  width: 260px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.5;
+  z-index: 1200;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.task-preview.active {
+  display: block;
+}
+
+.task-preview-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.task-preview-meta {
+  opacity: 0.9;
+}
+
+/* =========================
+   Responsive Adjustment
+========================= */
+
+/* 全体の横幅と余白を画面に応じて調整 */
+.dashboard {
+  width: calc(100% - 48px);
+  max-width: none;
+  margin: 0 auto;
+  padding: clamp(12px, 2vw, 28px) 0 clamp(24px, 4vw, 48px);
+}
+
+/* カード全体の余白を可変にする */
+.card {
+  padding: clamp(14px, 2vw, 24px);
+}
+
+/* タイトルサイズを画面に応じて調整 */
+.card-header h2 {
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+/* トップの2カラム */
+.top-grid {
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+}
+
+/* 直近予定カードの高さを画面に応じて調整 */
+.upcoming-card {
+  min-height: clamp(360px, 48vh, 560px);
+  max-height: clamp(420px, 58vh, 640px);
+}
+
+/* スクロール領域がカードの残りを使うようにする */
+.upcoming-scroll-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* 予定1件分の表示も少し可変にする */
+.upcoming-item {
+  grid-template-columns: clamp(56px, 8vw, 90px) 1fr auto;
+  gap: clamp(8px, 1.5vw, 14px);
+  padding: clamp(10px, 1.5vw, 14px) 8px;
+}
+
+.upcoming-title {
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+
+.upcoming-meta {
+  font-size: clamp(11px, 1.3vw, 13px);
+}
+
+/* ミニカレンダー */
+.calendar-card {
+  min-width: 0;
+}
+
+.calendar-day {
+  min-height: clamp(44px, 6vw, 68px);
+  padding: clamp(2px, 0.7vw, 5px);
+}
+
+.calendar-day-number {
+  font-size: clamp(11px, 1.3vw, 14px);
+}
+
+.calendar-task-label {
+  font-size: clamp(8px, 1vw, 10px);
+  padding: 1px 4px;
+}
+
+/* 時計カード */
+.home-clock-card {
+  min-height: clamp(340px, 42vh, 500px);
+}
+
+.home-clock {
+  width: clamp(240px, 32vw, 380px);
+  height: clamp(240px, 32vw, 380px);
+  min-width: 220px;
+  min-height: 220px;
+}
+
+/* モーダル */
+.modal-content {
+  width: min(520px, calc(100vw - 32px));
+  max-height: min(90vh, 720px);
+}
+
+/* =========================
+   Tablet / Small PC
+========================= */
+
+@media (max-width: 900px) {
+  .dashboard {
+    width: min(1000px, calc(100% - 24px));
+  }
+
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-card {
+    max-height: 520px;
+  }
+
+  .calendar-card {
+    min-height: auto;
+  }
+
+  .home-clock-card {
+    min-height: auto;
+  }
+
+  .home-clock {
+    width: clamp(240px, 55vw, 360px);
+    height: clamp(240px, 55vw, 360px);
+  }
+}
+
+/* =========================
+   Smartphone
+========================= */
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .site-header h1 {
+    font-size: 22px;
+  }
+
+  .dashboard {
+    width: calc(100% - 16px);
+    padding-top: 12px;
+  }
+
+  .card {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .card-header {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .card-header h2 {
+    font-size: 18px;
+  }
+
+  .add-task-button {
+    font-size: 12px;
+    padding: 7px 10px;
+    white-space: nowrap;
+  }
+
+  .upcoming-card {
+    min-height: 360px;
+    max-height: 500px;
+  }
+
+  .upcoming-item {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "date content"
+      "date priority";
+    align-items: start;
+  }
+
+  .upcoming-date {
+    grid-area: date;
+  }
+
+  .upcoming-item > div:nth-child(2) {
+    grid-area: content;
+  }
+
+  .upcoming-item > div:nth-child(3) {
+    grid-area: priority;
+    font-size: 12px;
+  }
+
+  .calendar-weekdays span {
+    font-size: 11px;
+  }
+
+  .calendar-day {
+    min-height: 48px;
+  }
+
+  .calendar-task-label {
+    max-width: 100%;
+    font-size: 8px;
+  }
+
+  .home-clock {
+    width: min(72vw, 300px);
+    height: min(72vw, 300px);
+    min-width: 220px;
+    min-height: 220px;
+  }
+
+  .home-clock .number span {
+    font-size: clamp(22px, 7vw, 36px);
+  }
+
+  .home-clock .date-display {
+    font-size: 13px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-content {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .task-preview {
+    display: none !important;
+  }
+}
+
+/* =========================
+   Very Small Screen
+========================= */
+
+@media (max-width: 420px) {
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-day {
+    min-height: 42px;
+    padding: 2px;
+  }
+
+  .calendar-task-label {
+    display: none;
+  }
+
+  .calendar-more {
+    font-size: 9px;
+  }
+
+  .home-clock {
+    width: 82vw;
+    height: 82vw;
+    min-width: 200px;
+    min-height: 200px;
+  }
+}
+
+/* =========================
+   Header Settings
+========================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+}
+
+.settings-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.settings-button:hover {
+  opacity: 0.85;
+}
+
+/* =========================
+   Layout Adjustable Area
+========================= */
+
+.dashboard {
+  width: var(--dashboard-width, 96vw);
+  max-width: none;
+  margin: 0 auto;
+}
+
+.top-grid {
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
+}
+
+.home-clock-card {
+  min-height: var(--clock-card-height, 460px);
+}
+
+.layout-setting-list {
+  display: grid;
+  gap: 18px;
+}
+
+.layout-setting-list input[type="range"] {
+  width: 100%;
+}
+
+/* =========================
+   Calendar-like Form
+========================= */
+
+.form-row-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-row-inline input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+}
+
+.time-grid,
+.travel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-row textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+input:disabled,
+select:disabled {
+  background: #eeeeee;
+  color: #777;
+}
+
+@media (max-width: 600px) {
+  .time-grid,
+  .travel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   Mini Calendar View Modes
+========================= */
+
+.calendar-view-switch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.calendar-mode-button {
+  flex: 1;
+  padding: 6px 0;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: #f1f1f1;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.calendar-mode-button.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.mini-calendar {
+  min-height: 260px;
+}
+
+/* =========================
+   Month View
+========================= */
+
+.calendar-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 4px;
+}
+
+.calendar-weekdays span {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+}
+
+.calendar-day {
+  min-height: 58px;
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+.calendar-day.today {
+  background: #111;
+  color: #fff;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.calendar-task-area {
+  display: grid;
+  gap: 2px;
+}
+
+.calendar-task-label {
+  padding: 1px 4px;
+  border-radius: 999px;
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111;
+}
+
+.calendar-more {
+  font-size: 10px;
+  color: #555;
+  text-align: center;
+}
+
+/* =========================
+   Day View
+========================= */
+
+.mini-day-header,
+.mini-week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mini-day-title,
+.mini-week-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.mini-calendar-nav-button {
+  border: none;
+  border-radius: 999px;
+  background: #eee;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+.mini-day-all-day {
+  margin-bottom: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.mini-day-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-height: 240px;
+  overflow: hidden;
+}
+
+.mini-day-column {
+  display: grid;
+  gap: 4px;
+}
+
+.mini-hour-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 6px;
+  align-items: start;
+  min-height: 34px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.mini-hour-row.current-hour {
+  border-top: 3px solid #111;
+  padding-top: 6px;
+}
+
+.mini-hour-label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #555;
+}
+
+.mini-hour-tasks {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mini-empty-hour {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* =========================
+   Week View
+========================= */
+
+.mini-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.mini-week-day {
+  min-height: 170px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  padding: 6px;
+  overflow: hidden;
+}
+
+.mini-week-day.today {
+  background: #111;
+  color: #fff;
+}
+
+.mini-week-date {
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.mini-week-tasks {
+  display: grid;
+  gap: 3px;
+}
+
+.mini-week-task {
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   Small Screen Calendar
+========================= */
+
+@media (max-width: 600px) {
+  .mini-week-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-week-day {
+    min-height: auto;
+  }
+
+  .mini-day-grid {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+}
+
+/* =========================
+   Mini Day View Adjustment
+========================= */
+
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-calendar {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 日表示全体 */
+.mini-day-view {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 日表示の時間グリッド */
+.mini-day-grid {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* 左右それぞれの列 */
+.mini-day-column {
+  display: grid;
+  grid-template-rows: repeat(var(--day-view-rows, 6), minmax(0, 1fr));
+  gap: 4px;
+  min-height: 0;
+}
+
+/* 1時間分の行 */
+.mini-hour-row {
+  min-height: 0;
+  padding: 4px 0;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 6px;
+  align-items: start;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+/* 現在時刻の時間帯 */
+.mini-hour-row.current-hour {
+  border-top: 3px solid #111;
+  padding-top: 5px;
+}
+
+.mini-hour-label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #333;
+}
+
+.mini-hour-tasks {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.mini-day-help {
+  flex-shrink: 0;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #555;
+}

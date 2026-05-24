@@ -1,0 +1,47 @@
+<!-- /calendar.html -->
+    <!-- カレンダー詳細ページ -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>カレンダー</h1>
+  </header>
+
+  <main class="calendar-page">
+    <div class="page-nav">
+      <a href="index.html" class="text-link">← トップへ戻る</a>
+      <a href="tasks.html" class="text-link">予定を管理する →</a>
+    </div>
+
+    <section class="card">
+      <div class="calendar-page-header">
+        <button id="prevMonthButton">前月</button>
+        <h2 id="fullCalendarTitle"></h2>
+        <button id="nextMonthButton">次月</button>
+      </div>
+
+      <div class="full-calendar-weekdays">
+        <span>日</span>
+        <span>月</span>
+        <span>火</span>
+        <span>水</span>
+        <span>木</span>
+        <span>金</span>
+        <span>土</span>
+      </div>
+
+      <div class="full-calendar-days" id="fullCalendarDays"></div>
+    </section>
+  </main>
+
+  <script src="js/tasks.js"></script>
+  <script src="js/calendar.js"></script>
+</body>
+</html>

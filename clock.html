@@ -1,0 +1,39 @@
+<!-- /clock.html -->
+    <!-- 時計だけのページ -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog Clock</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>アナログ時計</h1>
+  </header>
+
+  <main class="clock-page">
+    <div class="page-nav">
+      <a href="index.html" class="text-link">← トップへ戻る</a>
+    </div>
+
+    <section class="clock-page-content">
+      <div class="clock large-clock" id="clock">
+        <div class="ticks" id="ticks"></div>
+        <div class="numbers" id="numbers"></div>
+
+        <div class="hand hour-hand" id="hourHand"></div>
+        <div class="hand minute-hand" id="minuteHand"></div>
+        <div class="hand second-hand" id="secondHand"></div>
+
+        <div class="center-dot"></div>
+        <div class="date-display" id="currentDate"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/clock.js"></script>
+</body>
+</html>
