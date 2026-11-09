@@ -42,39 +42,6 @@ const taskPreview = document.getElementById("taskPreview");
    Utility
 ========================= */
 
-function getPriorityClass(importance) {
-  if (importance >= 5) return "priority-high";
-  if (importance >= 3) return "priority-middle";
-  return "priority-low";
-}
-
-function getDaysText(daysLeft) {
-  if (daysLeft === 0) return "今日";
-  if (daysLeft === 1) return "明日";
-  if (daysLeft > 1) return `あと${daysLeft}日`;
-  return `${Math.abs(daysLeft)}日前`;
-}
-
-function getTaskDate(task) {
-  return task.startDate;
-}
-
-function getTaskCategory(task) {
-  return task.category || "その他";
-}
-
-function formatTaskTime(task) {
-  if (task.isAllDay) {
-    return "終日";
-  }
-
-  if (!task.startTime && !task.endTime) {
-    return "時刻未設定";
-  }
-
-  return `${task.startTime || "--:--"} - ${task.endTime || "--:--"}`;
-}
-
 function updateTimeInputsState() {
   const isAllDay = modalTaskIsAllDay.checked;
 
@@ -228,27 +195,6 @@ function isSameDate(dateA, dateB) {
   return formatDateString(dateA) === formatDateString(dateB);
 }
 
-function getTasksForDate(dateString) {
-  const tasks = loadTasks();
-
-  return tasks
-    .filter(task => {
-      if (task.completed) return false;
-
-      const startDate = task.startDate;
-      const endDate = task.endDate || task.startDate;
-
-      return startDate <= dateString && dateString <= endDate;
-    })
-    .sort((a, b) => {
-      if (a.isAllDay !== b.isAllDay) {
-        return a.isAllDay ? -1 : 1;
-      }
-
-      return (a.startTime || "99:99").localeCompare(b.startTime || "99:99");
-    });
-}
-
 function timeToMinutes(timeString) {
   if (!timeString) return null;
 
@@ -312,21 +258,6 @@ function clampDayViewStartHour(visibleRowsPerColumn) {
   if (dayViewStartHour > maxStartHour) {
     dayViewStartHour = maxStartHour;
   }
-}
-
-function renderTaskLabel(task) {
-  const category = getTaskCategory(task);
-  const color = getCategoryColor(category);
-
-  return `
-    <div
-      class="calendar-task-label"
-      style="background: ${color};"
-      title="${task.title}"
-    >
-      ${task.title}
-    </div>
-  `;
 }
 
 function updateCalendarModeButtons() {

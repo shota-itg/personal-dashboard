@@ -173,3 +173,72 @@ function getCategoryColor(categoryName) {
   const category = DEFAULT_CATEGORIES.find(category => category.name === categoryName);
   return category ? category.color : "#e5e7eb";
 }
+
+function getTaskDate(task) {
+  return task.startDate;
+}
+
+function getTaskCategory(task) {
+  return task.category || "その他";
+}
+
+function getPriorityClass(importance) {
+  if (importance >= 5) return "priority-high";
+  if (importance >= 3) return "priority-middle";
+  return "priority-low";
+}
+
+function getDaysText(daysLeft) {
+  if (daysLeft === 0) return "今日";
+  if (daysLeft === 1) return "明日";
+  if (daysLeft > 1) return `あと${daysLeft}日`;
+  return `${Math.abs(daysLeft)}日前`;
+}
+
+function formatTaskTime(task) {
+  if (task.isAllDay) {
+    return "終日";
+  }
+
+  if (!task.startTime && !task.endTime) {
+    return "時刻未設定";
+  }
+
+  return `${task.startTime || "--:--"} - ${task.endTime || "--:--"}`;
+}
+
+function getTasksForDate(dateString) {
+  const tasks = loadTasks();
+
+  return tasks
+    .filter(task => {
+      if (task.completed) return false;
+
+      const startDate = task.startDate;
+      const endDate = task.endDate || task.startDate;
+
+      return startDate <= dateString && dateString <= endDate;
+    })
+    .sort((a, b) => {
+      if (a.isAllDay !== b.isAllDay) {
+        return a.isAllDay ? -1 : 1;
+      }
+
+      return (a.startTime || "99:99").localeCompare(b.startTime || "99:99");
+    });
+}
+
+function renderTaskLabel(task) {
+  const category = getTaskCategory(task);
+  const color = getCategoryColor(category);
+
+  return `
+    <div
+      class="calendar-task-label"
+      style="background: ${color};"
+      title="${task.title}"
+    >
+      ${task.title}
+    </div>
+  `;
+}

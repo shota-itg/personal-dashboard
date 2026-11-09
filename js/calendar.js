@@ -9,8 +9,6 @@ let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
 
 function renderFullCalendar() {
-  const tasks = loadTasks();
-
   fullCalendarTitle.textContent = `${currentYear}年 ${currentMonth + 1}月`;
   fullCalendarDays.innerHTML = "";
 
@@ -42,17 +40,10 @@ function renderFullCalendar() {
       day.classList.add("today");
     }
 
-    const dayTasks = tasks
-      .filter(task => task.date === dateString && !task.completed)
+    const dayTasks = getTasksForDate(dateString)
       .sort((a, b) => b.importance - a.importance);
 
-    const taskLabels = dayTasks.map(task => {
-      return `
-        <div class="calendar-task-label type-${task.type}" title="${task.title}">
-          ${task.title}
-        </div>
-      `;
-    }).join("");
+    const taskLabels = dayTasks.map(renderTaskLabel).join("");
 
     day.innerHTML = `
       <div class="full-calendar-day-number">${date}</div>

@@ -3,18 +3,45 @@
 const taskForm = document.getElementById("taskForm");
 const taskIdInput = document.getElementById("taskId");
 const taskTitleInput = document.getElementById("taskTitle");
-const taskDateInput = document.getElementById("taskDate");
-const taskTypeInput = document.getElementById("taskType");
+const taskLocationInput = document.getElementById("taskLocation");
+const taskCategoryInput = document.getElementById("taskCategory");
+const taskIsAllDayInput = document.getElementById("taskIsAllDay");
+const taskStartDateInput = document.getElementById("taskStartDate");
+const taskStartTimeInput = document.getElementById("taskStartTime");
+const taskEndDateInput = document.getElementById("taskEndDate");
+const taskEndTimeInput = document.getElementById("taskEndTime");
+const taskTravelModeInput = document.getElementById("taskTravelMode");
+const taskTravelTimeInput = document.getElementById("taskTravelTime");
 const taskImportanceInput = document.getElementById("taskImportance");
+const taskMemoInput = document.getElementById("taskMemo");
 const taskList = document.getElementById("taskList");
 const submitButton = document.getElementById("submitButton");
 const cancelEditButton = document.getElementById("cancelEditButton");
+
+function updateTaskTimeInputsState() {
+  const isAllDay = taskIsAllDayInput.checked;
+
+  taskStartTimeInput.disabled = isAllDay;
+  taskEndTimeInput.disabled = isAllDay;
+
+  if (isAllDay) {
+    taskStartTimeInput.value = "";
+    taskEndTimeInput.value = "";
+  }
+}
+
+function resetTaskForm() {
+  taskForm.reset();
+  taskIdInput.value = "";
+  submitButton.textContent = "追加する";
+  updateTaskTimeInputsState();
+}
 
 function renderTaskList() {
   const tasks = loadTasks()
     .map(task => ({
       ...task,
-      daysLeft: getDaysLeft(task.date)
+      daysLeft: getDaysLeft(getTaskDate(task))
     }))
     .sort((a, b) => {
       if (a.completed !== b.completed) {
@@ -38,23 +65,16 @@ function renderTaskList() {
       li.classList.add("completed");
     }
 
-    let daysText = "";
-    if (task.daysLeft === 0) {
-      daysText = "今日";
-    } else if (task.daysLeft === 1) {
-      daysText = "明日";
-    } else if (task.daysLeft > 1) {
-      daysText = `あと${task.daysLeft}日`;
-    } else {
-      daysText = `${Math.abs(task.daysLeft)}日前`;
-    }
+    const category = getTaskCategory(task);
+    const daysText = getDaysText(task.daysLeft);
+    const timeText = formatTaskTime(task);
 
     li.innerHTML = `
       <div class="task-main">
         <input type="checkbox" ${task.completed ? "checked" : ""} data-action="toggle" data-id="${task.id}" />
         <div>
           <div class="task-title">${task.title}</div>
-          <div class="task-meta">${task.date}・${task.type}・${daysText}・重要度 ${task.importance}</div>
+          <div class="task-meta">${task.startDate}・${category}・${timeText}・${daysText}・重要度 ${task.importance}</div>
         </div>
       </div>
 
@@ -73,9 +93,20 @@ taskForm.addEventListener("submit", event => {
 
   const taskData = {
     title: taskTitleInput.value,
-    date: taskDateInput.value,
-    type: taskTypeInput.value,
-    importance: taskImportanceInput.value
+    category: taskCategoryInput.value,
+    location: taskLocationInput.value,
+
+    isAllDay: taskIsAllDayInput.checked,
+
+    startDate: taskStartDateInput.value,
+    startTime: taskStartTimeInput.value,
+    endDate: taskEndDateInput.value,
+    endTime: taskEndTimeInput.value,
+
+    travelMode: taskTravelModeInput.value,
+    travelTimeMinutes: Number(taskTravelTimeInput.value),
+
+    memo: taskMemoInput.value
   };
 
   const editingTaskId = taskIdInput.value;
@@ -86,9 +117,7 @@ taskForm.addEventListener("submit", event => {
     addTask(taskData);
   }
 
-  taskForm.reset();
-  taskIdInput.value = "";
-  submitButton.textContent = "追加する";
+  resetTaskForm();
   renderTaskList();
 });
 
@@ -107,11 +136,27 @@ taskList.addEventListener("click", event => {
     const tasks = loadTasks();
     const task = tasks.find(task => task.id === taskId);
 
+    if (!task) return;
+
     taskIdInput.value = task.id;
     taskTitleInput.value = task.title;
-    taskDateInput.value = task.date;
-    taskTypeInput.value = task.type;
+    taskLocationInput.value = task.location || "";
+    taskCategoryInput.value = getTaskCategory(task);
+
+    taskIsAllDayInput.checked = Boolean(task.isAllDay);
+
+    taskStartDateInput.value = task.startDate;
+    taskStartTimeInput.value = task.startTime || "";
+    taskEndDateInput.value = task.endDate || task.startDate;
+    taskEndTimeInput.value = task.endTime || "";
+
+    taskTravelModeInput.value = task.travelMode || "none";
+    taskTravelTimeInput.value = task.travelTimeMinutes || 0;
+
     taskImportanceInput.value = task.importance;
+    taskMemoInput.value = task.memo || "";
+
+    updateTaskTimeInputsState();
 
     submitButton.textContent = "更新する";
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,9 +173,15 @@ taskList.addEventListener("click", event => {
 });
 
 cancelEditButton.addEventListener("click", () => {
-  taskForm.reset();
-  taskIdInput.value = "";
-  submitButton.textContent = "追加する";
+  resetTaskForm();
+});
+
+taskIsAllDayInput.addEventListener("change", updateTaskTimeInputsState);
+
+taskStartDateInput.addEventListener("change", () => {
+  if (!taskEndDateInput.value || taskEndDateInput.value < taskStartDateInput.value) {
+    taskEndDateInput.value = taskStartDateInput.value;
+  }
 });
 
 renderTaskList();
